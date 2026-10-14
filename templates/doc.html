@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Documentation API</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+  <header>
+    <h1>Documentation de l'API</h1>
+    <nav>
+      <a href="/">← Retour</a>
+    </nav>
+  </header>
+
+  <main>
+    <article>
+      <h2>GET /contrevenants</h2>
+      <p>Retourne la liste des contraventions entre deux dates.</p>
+
+      <h3>Paramètres</h3>
+      <ul>
+        <li><strong>du</strong> : date de début (format ISO 8601, ex: 2022-05-08)</li>
+        <li><strong>au</strong> : date de fin (format ISO 8601, ex: 2024-05-15)</li>
+      </ul>
+
+      <h3>Exemple de requête</h3>
+      <code>GET /contrevenants?du=2022-05-08&amp;au=2024-05-15</code>
+
+      <h3>Exemple de réponse</h3>
+      <pre>
+[
+  {
+    "id_poursuite": 1,
+    "etablissement": "MARCHE KIM HOUR",
+    "date": "20220101",
+    "montant": 4000
+  }
+]
+         </pre>
+
+      <h3>Erreurs</h3>
+      <ul>
+        <li><strong>400</strong> : paramètre <code>du</code> ou <code>au</code> absent, date qui n'est pas au format ISO 8601, ou <code>du</code> postérieure à <code>au</code>.</li>
+      </ul>
+    </article>
+
+    <hr>
+
+    <article>
+      <h2>GET /contrevenants/etablissements</h2>
+      <p>Retourne la liste des établissements triée par nombre d'infractions décroissant.</p>
+
+      <h3>Exemple de requête</h3>
+      <code>GET /contrevenants/etablissements</code>
+
+      <h3>Exemple de réponse</h3>
+      <pre>
+[
+  {
+    "etablissement": "MARCHE KIM HOUR",
+    "nombre_infractions": 15
+  }
+]
+         </pre>
+    </article>
+
+    <hr>
+
+    <article>
+      <h2>POST /inspections</h2>
+      <p>Crée une demande d'inspection pour un établissement.</p>
+
+      <h3>Corps de la requête (JSON)</h3>
+      <pre>
+{
+  "etablissement": "MARCHE KIM HOUR",
+  "adresse": "123 Rue Test",
+  "ville": "Montréal",
+  "date_visite": "2026-04-06",
+  "nom_client": "Tremblay",
+  "prenom_client": "Marie",
+  "description": "Présence de rongeurs dans la cuisine"
+}
+         </pre>
+
+      <h3>Exemple de réponse</h3>
+      <pre>
+{
+  "message": "Demande d'inspection créée !"
+}
+         </pre>
+    </article>
+
+    <hr>
+
+    <article>
+      <h2>DELETE /inspections/&lt;id&gt;</h2>
+      <p>Supprime une demande d'inspection par son identifiant.</p>
+
+      <h3>Exemple de requête</h3>
+      <code>DELETE /inspections/1</code>
+
+      <h3>Exemple de réponse</h3>
+      <pre>
+{
+  "message": "Inspection supprimée !"
+}
+         </pre>
+    </article>
+
+    <hr>
+
+    <article>
+      <h2>POST /utilisateurs</h2>
+      <p>Crée un profil utilisateur.</p>
+
+      <h3>Corps de la requête (JSON)</h3>
+      <pre>
+{
+  "nom_complet": "Marie Tremblay",
+  "courriel": "marie@example.com",
+  "mot_de_passe": "secret123",
+  "etablissements_surveilles": ["MARCHE KIM HOUR", "TIM HORTONS"]
+}
+         </pre>
+
+      <h3>Exemple de réponse</h3>
+      <pre>
+{
+  "message": "Utilisateur créé !"
+}
+         </pre>
+
+      <h3>Erreurs</h3>
+      <ul>
+        <li><strong>400</strong> : champ manquant, courriel invalide ou mot de passe de moins de 8 caractères.</li>
+        <li><strong>409</strong> : courriel déjà utilisé.</li>
+      </ul>
+    </article>
+  </main>
+</body>
+
+</html>

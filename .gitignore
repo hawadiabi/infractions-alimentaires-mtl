@@ -1,0 +1,8 @@
+.venv/
+venv/
+__pycache__/
+*.pyc
+.env
+
+# Base de données locale : elle est recréée par import_data.py
+db/violations.db

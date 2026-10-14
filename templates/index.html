@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+   <meta charset="UTF-8">
+   <title>Contraventions Montréal</title>
+   <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+   <header>
+      <h1>Recherche de contraventions</h1>
+   </header>
+
+   <main>
+      <!-- Formulaire A2 - recherche par texte -->
+      <section>
+         <h2>Recherche par nom, propriétaire ou rue</h2>
+         <form action="/recherche" method="get">
+            <label for="critere">Critère :</label>
+            <select name="critere" id="critere">
+               <option value="etablissement">Nom d'établissement</option>
+               <option value="proprietaire">Propriétaire</option>
+               <option value="rue">Rue</option>
+            </select>
+            <label for="valeur">Recherche :</label>
+            <input type="text" name="valeur" id="valeur" placeholder="Votre recherche..." required>
+            <button type="submit">Rechercher</button>
+         </form>
+      </section>
+
+      <!-- Formulaire A5 - recherche par dates -->
+      <section>
+         <h2>Recherche par période</h2>
+         <form>
+            <label for="date-debut">Du :</label>
+            <input type="date" id="date-debut" name="date-debut" min="2000-01-01" max="2099-12-31">
+            <label for="date-fin">Au :</label>
+            <input type="date" id="date-fin" name="date-fin" min="2000-01-01" max="2099-12-31">
+            <button type="button" id="btn-dates">Rechercher</button>
+         </form>
+         <div class="table-wrapper" id="resultats-dates" class="mt-20"></div>
+      </section>
+
+      <!-- Formulaire A6 - recherche par restaurant -->
+      <section>
+         <h2>Recherche par restaurant</h2>
+         <form>
+            <label for="liste-restaurants">Restaurant :</label>
+            <select id="liste-restaurants">
+               <option value="">-- Chargement... --</option>
+            </select>
+            <button type="button" id="btn-restaurant">
+               Rechercher
+            </button>
+         </form>
+         <div id="resultats-restaurant" class="mt-20"></div>
+      </section>
+   </main>
+   <script src="/static/js/commun.js"></script>
+   <script src="/static/js/index.js"></script>
+</body>
+
+</html>

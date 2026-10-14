@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+   <meta charset="UTF-8">
+   <title>Mon profil</title>
+   <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+   <header>
+      <h1>Mon profil</h1>
+      <nav>
+         <a href="/">← Retour</a>
+         <a href="/deconnexion" class="ml-20">Se déconnecter</a>
+      </nav>
+   </header>
+
+   <main>
+      <section>
+         <h2>Informations</h2>
+         <div id="message" role="status"></div>
+         <div class="profil-info">
+            <p><strong>Nom :</strong> {{ utilisateur["nom_complet"] }}</p>
+            <p><strong>Courriel :</strong> {{ utilisateur["courriel"] }}</p>
+         </div>
+      </section>
+
+      <section>
+         <h2>Photo de profil</h2>
+         <div class="profil-info">
+            <form>
+               <label for="photo">Choisir une photo :</label>
+               <input type="file" id="photo" name="photo" accept=".jpg,.jpeg,.png">
+               <button type="button" id="btn-photo">
+                  Téléverser la photo
+               </button>
+            </form>
+         </div>
+      </section>
+
+      <section>
+         <h2>Établissements surveillés</h2>
+         <div id="liste-etablissements" data-etablissements="{{ etablissements | tojson | forceescape }}"></div>
+
+         <div class="profil-info mt-15">
+            <form>
+               <label for="nouvel-etablissement">
+                  Ajouter un établissement :
+               </label>
+               <input type="text" id="nouvel-etablissement" name="nouvel-etablissement"
+                  placeholder="Nom de l'établissement">
+               <button type="button" id="btn-ajouter">Ajouter</button>
+            </form>
+         </div>
+      </section>
+   </main>
+   <script src="/static/js/commun.js"></script>
+   <script src="/static/js/profil.js"></script>
+</body>
+
+</html>

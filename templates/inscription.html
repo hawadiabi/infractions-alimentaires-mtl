@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+   <meta charset="UTF-8">
+   <title>Inscription</title>
+   <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+   <header>
+      <h1>Créer un compte</h1>
+      <nav>
+         <a href="/">← Retour</a>
+      </nav>
+   </header>
+
+   <main>
+      <div id="message" role="status"></div>
+
+      <div>
+         <form id="form-inscription" novalidate>
+            <div>
+               <label for="nom_complet">Nom complet :</label>
+               <input type="text" id="nom_complet" name="nom_complet">
+            </div>
+            <div>
+               <label for="courriel">Courriel :</label>
+               <input type="email" id="courriel" name="courriel">
+            </div>
+            <div>
+               <label for="mot_de_passe">Mot de passe (8 caractères minimum) :</label>
+               <input type="password" id="mot_de_passe" name="mot_de_passe" minlength="8">
+            </div>
+            <div>
+               <label for="etablissements">
+                  Établissements à surveiller (séparés par des virgules) :
+               </label>
+               <input type="text" id="etablissements" name="etablissements" placeholder="TIM HORTONS, SUBWAY">
+            </div>
+            <button type="submit">Créer mon compte</button>
+         </form>
+      </div>
+   </main>
+   <script src="/static/js/commun.js"></script>
+   <script src="/static/js/inscription.js"></script>
+</body>
+
+</html>

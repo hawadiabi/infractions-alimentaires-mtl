@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+   <meta charset="UTF-8">
+   <title>Résultats</title>
+   <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+   <header>
+      <h1>Résultats pour "{{ valeur }}"</h1>
+      <nav>
+         <a href="/">← Retour</a>
+      </nav>
+   </header>
+
+   <main>
+      {% if resultats %}
+      <p>{{ resultats|length }} contravention(s) trouvée(s)</p>
+      {% for r in resultats %}
+      <article class="carte">
+         <h2>{{ r["etablissement"] }}</h2>
+         <p><strong>Propriétaire :</strong> {{ r["proprietaire"] }}</p>
+         <p><strong>Adresse :</strong> {{ r["adresse"] }}</p>
+         <p><strong>Date :</strong> {{ r["date"][:4] }}-{{ r["date"][4:6] }}-{{ r["date"][6:] }}</p>
+         <p><strong>Description :</strong> {{ r["description"] }}</p>
+         <p><strong>Montant :</strong> {{ r["montant"] }} $</p>
+         <p><strong>Statut :</strong> {{ r["statut"] }}</p>
+         <p><strong>Catégorie :</strong> {{ r["categorie"] }}</p>
+      </article>
+      {% endfor %}
+      {% else %}
+      <p>Aucun résultat trouvé.</p>
+      {% endif %}
+   </main>
+</body>
+
+</html>

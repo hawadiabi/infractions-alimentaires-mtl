@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+   <meta charset="UTF-8">
+   <title>Faire une plainte</title>
+   <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+   <header>
+      <h1>Faire une demande d'inspection</h1>
+      <nav>
+         <a href="/">← Retour</a>
+      </nav>
+   </header>
+
+   <main>
+      <div id="message" role="status"></div>
+      <div>
+         <form id="form-plainte" novalidate>
+            <div>
+               <label for="etablissement">Établissement :</label>
+               <input type="text" id="etablissement" name="etablissement">
+            </div>
+            <div>
+               <label for="adresse">Adresse :</label>
+               <input type="text" id="adresse" name="adresse">
+            </div>
+            <div>
+               <label for="ville">Ville :</label>
+               <input type="text" id="ville" name="ville">
+            </div>
+            <div>
+               <label for="date_visite">Date de visite :</label>
+               <input type="date" id="date_visite" name="date_visite" min="2000-01-01" max="2099-12-31">
+            </div>
+            <div>
+               <label for="prenom_client">Prénom :</label>
+               <input type="text" id="prenom_client" name="prenom_client">
+            </div>
+            <div>
+               <label for="nom_client">Nom :</label>
+               <input type="text" id="nom_client" name="nom_client">
+            </div>
+            <div>
+               <label for="description">Description du problème :</label>
+               <textarea id="description" name="description" rows="4" cols="40"></textarea>
+            </div>
+            <button type="submit">
+               Envoyer la plainte
+            </button>
+         </form>
+      </div>
+   </main>
+   <script src="/static/js/commun.js"></script>
+   <script src="/static/js/plainte.js"></script>
+</body>
+
+</html>

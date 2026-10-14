@@ -1,0 +1,13 @@
+# Configuration de l'application
+# expediteur : adresse Gmail qui envoie les courriels
+# destinataire : adresse qui reçoit les alertes
+# mot_de_passe : mot de passe d'application Gmail. Ne pas l'écrire ici :
+#   le définir dans la variable d'environnement SMTP_MOT_DE_PASSE.
+# smtp_serveur : serveur SMTP
+# smtp_port : port SMTP
+email:
+  destinataire: votre.adresse@example.com
+  expediteur: votre.compte@gmail.com
+  mot_de_passe: ""
+  smtp_serveur: smtp.gmail.com
+  smtp_port: 587

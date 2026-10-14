@@ -1,0 +1,159 @@
+#%RAML 1.0
+title: Contraventions Montréal
+version: v1
+baseUri: http://localhost:5000
+
+/contrevenants:
+  get:
+    description: Retourne les contraventions entre deux dates
+    queryParameters:
+      du:
+        description: Date de début (ISO 8601)
+        type: date-only
+        required: true
+        example: "2022-05-08"
+      au:
+        description: Date de fin (ISO 8601)
+        type: date-only
+        required: true
+        example: "2024-05-15"
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              [
+                {
+                  "id_poursuite": 1,
+                  "etablissement": "MARCHE KIM HOUR",
+                  "date": "20220101"
+                }
+              ]
+      400:
+        description: Paramètre absent, date invalide ou du postérieure à au
+        body:
+          application/json:
+            example: |
+              {
+                "erreur": "Les paramètres 'du' et 'au' sont obligatoires."
+              }
+
+  /etablissements:
+    get:
+      description: Retourne la liste des établissements triée par nombre d'infractions
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                [
+                  {
+                    "etablissement": "RESTAURANT BASHA",
+                    "nombre_infractions": 41
+                  }
+                ]
+
+/inspections:
+  post:
+    description: Crée une demande d'inspection
+    body:
+      application/json:
+        properties:
+          etablissement:
+            type: string
+            required: true
+          adresse:
+            type: string
+            required: true
+          ville:
+            type: string
+            required: true
+          date_visite:
+            type: string
+            required: true
+          nom_client:
+            type: string
+            required: true
+          prenom_client:
+            type: string
+            required: true
+          description:
+            type: string
+            required: true
+    responses:
+      201:
+        body:
+          application/json:
+            example: |
+              {
+                "message": "Demande d'inspection créée !"
+              }
+      400:
+        body:
+          application/json:
+            example: |
+              {
+                "erreur": "'description' is a required property"
+              }
+
+  /{id}:
+    delete:
+      description: Supprime une demande d'inspection par son id
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {
+                  "message": "Inspection supprimée !"
+                }
+        404:
+          body:
+            application/json:
+              example: |
+                {
+                  "erreur": "Inspection non trouvée"
+                }
+
+/utilisateurs:
+  post:
+    description: Crée un profil utilisateur
+    body:
+      application/json:
+        properties:
+          nom_complet:
+            type: string
+            required: true
+          courriel:
+            type: string
+            required: true
+            pattern: ^[^@\s]+@[^@\s]+\.[^@\s]+$
+          mot_de_passe:
+            type: string
+            required: true
+            minLength: 8
+          etablissements_surveilles:
+            type: array
+            required: true
+    responses:
+      201:
+        body:
+          application/json:
+            example: |
+              {
+                "message": "Utilisateur créé !"
+              }
+      400:
+        body:
+          application/json:
+            example: |
+              {
+                "erreur": "'courriel' is a required property"
+              }
+      409:
+        body:
+          application/json:
+            example: |
+              {
+                "erreur": "Courriel déjà utilisé"
+              }
